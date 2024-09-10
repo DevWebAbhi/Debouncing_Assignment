@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debouncing</title>
+</head>
+<body>
+    <h1>Debouncing Assignment</h1>
+    <h3>"apple","ball","cat","car","bus","train" you can try to search these data are avaliable.</h3>
+    <input type="text" id="inputtext">
+    <textarea name="" id="textpresent"></textarea>
+</body>
+<script>
+    const arr = ["apple","ball","cat","car","bus","train"];
+    const inputText = document.getElementById("inputtext");
+    const textPresent = document.getElementById("textpresent");
+    console.log(inputText.value)
+    inputText.addEventListener("input",()=>{
+        debounce(inputText.value);
+        console.log(inputText.value)
+    })
+    let debounceAsync;
+
+   async function debounce(text){
+        if(debounceAsync){
+            clearTimeout(debounceAsync);
+        }
+        debounceAsync = setTimeout(async()=>{
+            textPresent.innerText =await search(text);
+            console.log(await search(text))
+        },500)
+    }
+
+    async function  search(text){
+        try {
+        for(let i = 0;i<arr.length;i++){
+            if(text == arr[i].substr(0,text.length)){
+                return arr[i];
+
+            }
+        }
+        return "";
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+</script>
+</html>
